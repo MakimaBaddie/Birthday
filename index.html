@@ -115,7 +115,7 @@
     }
 
     .blown {
-        display: none;
+        opacity: 0;
     }
 
     .message {
@@ -227,9 +227,16 @@
     let isMuted = true;
 
     function blowCandles() {
-        document.querySelectorAll(".flame").forEach(flame => {
-            flame.classList.add("blown");
-        });
+        let flames = Array.from(document.querySelectorAll(".flame"))
+
+// Shuffles the Array (Fisher-Yates) 
+for (let i = flames.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[flames[i], flames[j]] = [flames[j], flames[i]]
+ }
+
+// this is lowkey stupid but i just wanted it all in one line
+flames.forEach((flame, i) => setTimeout(() => flame.classList.add("blown"), 50 * i));
 
        
 
@@ -277,6 +284,7 @@
 </script>
 </body>
 </html>
+
 
 
 
